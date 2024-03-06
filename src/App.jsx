@@ -91,7 +91,11 @@ function App() {
             <div className="flashcard" onClick={() => setFlip(!flip)}>{keys[currentCard]}</div>
             <div className="flashcard" onClick={() => setFlip(!flip)}>{values[currentCard]}</div>
         </ReactCardFlip>
-        <button onClick={nextCard}>Next</button>
+        <div className='button-container'>
+          <button onClick={() => location.reload()}><span>&#8635;</span></button>
+          <button onClick={nextCard}><span>&#8594;</span></button>
+        </div>
+        
     </>
   )
 }
