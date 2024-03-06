@@ -1,30 +1,29 @@
-# Web Development Project 2 - *Name of App Here*
+# Web Development Project 2 - Tennis Flashcards
 
-Submitted by: **Your Name Here**
+Submitted by: Lucas Umberger
 
-This web app: **insert description**
+This web app displays a deck of flashcards of tennis questions and facts to test thier knowledge. The user can flip the card from question to answer, and have the option to restart the cards or go to another random card.
 
-Time spent: **X** hours spent in total
+Time spent: 6 hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [ ] **The title of the card set and some information about it, such as a short description and the total number of cards are displayed**
-- [ ] **A single card at a time is displayed, only showing one of the components of the information pair**
-- [ ] **A list of card pairs is created**
-- [ ] **Clicking on the card shows the corresponding component of the information pair**
-- [ ] **Clicking the next button displays a random new card**
+- [x] **The title of the card set and some information about it, such as a short description and the total number of cards are displayed**
+- [x] **A single card at a time is displayed, only showing one of the components of the information pair**
+- [x] **A list of card pairs is created**
+- [x] **Clicking on the card shows the corresponding component of the information pair**
+- [x] **Clicking the next button displays a random new card**
 
 The following **optional** features are implemented:
 
-- [ ] Cards contains images in addition to or in place of text
-- [ ] Cards have different visual styles such as color based on their category
-  - [ ] *visual style implemented*
+- [x] Cards contains images in addition to or in place of text
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you added to improve the site's functionality!
+* [x] Button to restart cards refreshes the page
+* [x] Counter is displayed at the top to show the number of active flashcards in the deck
 
 ## Video Walkthrough
 
@@ -39,9 +38,11 @@ GIF created with ...
 [ScreenToGif](https://www.screentogif.com/) for Windows
 [peek](https://github.com/phw/peek) for Linux. -->
 
-## Notes
+## Challenges & Things Learned
 
-Describe any challenges encountered while building the app.
+ - One of the first challenges I experienced was trying to store key/value pairs in an array and accessing them by index. I was not familiar with using dictionaries in js previous to this and was forced to learn for this assignment. I had tried several things including storing them in separate arrays, mapping the dictionary out. However, I decided on creating the initial map and then using the Object.keys()/Object.values() methods to then create a keys and values array and access values with keys[index] and values[index].
+ - Another challenge was tring to get the card flip animation to display on the page. I had looked at some resources online and discovered a react import react-card-flip that creates the animation and requries a front and back side of the card. I used this and displayed the key on the front and the value on the back.
+ - The last challenge I had was with the animation. Going to the next card, the card would begin flipping and then the new card value was shown automatically. So when clicking the next button from the answer of one card, the next answer would show for a second. I was able to fix this by adding a sleep timer before showing the new card value, so that the card was flipped before the new values were shown.
 
 ## License
 
