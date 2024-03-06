@@ -69,15 +69,22 @@ function App() {
     return Math.floor(Math.random() * max) + 1;
   }
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   function nextCard() {
+    if (flip) {
+      setFlip(!flip);
+    }
+    
+    sleep(200).then(() => {
     var tempNum = getRandomInt(keys.length - 1);
     while (currentCard === tempNum) {
       tempNum = getRandomInt(keys.length - 1);
     }
     setCard(tempNum);
-    if (flip) {
-      setFlip(!flip);
-    }
+    });
   }
 
   return (
