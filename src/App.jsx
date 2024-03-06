@@ -5,7 +5,12 @@ import './App.css'
 function App() {
 
   const keys = [
-    "Get Started",
+    "Get Started!",
+    <img style= {{ height: '180px', width: 'auto', borderRadius: '7px' }} src='patrick-mouratoglou.jpg' />,
+    <img style= {{ height: '180px', width: 'auto', borderRadius: '7px' }} src='thiem.jpg' />,
+    <img style= {{ height: '180px', width: 'auto', borderRadius: '7px' }} src='bublik.jpg' />,
+    <img style= {{ height: '180px', width: 'auto', borderRadius: '7px' }} src='alex-de-minaur.jpg' />,
+    <img style= {{ height: '180px', width: 'auto', borderRadius: '7px' }} src='humbert.jpg' />,
     "When Carlos Alcaraz won the Wimbledon Men's Singles title in 2023, he became the youngest man to do so since who?",
     "Who did Emma Raducanu beat in the 2021 US Open final to secure an astonishing title win?",
     "What nationality is former Grand Slam finalist Marcos Baghdatis?",
@@ -29,7 +34,12 @@ function App() {
   ]
 
   const values = [
-    "Click the first name to reveal the last name",
+    "Click the flashcard to reveal the answer",
+    "Patrick Mouratoglou",
+    "Dominic Thiem",
+    "Alexander Bublik",
+    "Alex De Minaur",
+    "Ugo Humbert",
     "Boris Becker",
     "Leylah Annie Fernandez",
     "Cypriot",
@@ -78,40 +88,8 @@ function App() {
       <h4>Number of Cards: {keys.length - 1}</h4>
     </div>
       <ReactCardFlip onClick={() => setFlip(!flip)} isFlipped={flip} flipDirection="vertical">
-            <div onClick={() => setFlip(!flip)} style={{
-                width: '35vw',
-                height: '200px',
-                background: 'white',
-                fontSize: '2vw',
-                color: 'black',
-                margin: '20px',
-                borderRadius: '10px',
-                textAlign: 'center',
-                padding: '20px',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center'
-            }}>
-                {keys[currentCard]}
-            </div>
-            <div onClick={() => setFlip(!flip)} style={{
-                width: '35vw',
-                height: '200px',
-                background: 'white',
-                fontSize: '2vw',
-                color: 'black',
-                margin: '20px',
-                borderRadius: '10px',
-                textAlign: 'center',
-                padding: '20px',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center'
-            }}>
-                {values[currentCard]}
-            </div>
+            <div className="flashcard" onClick={() => setFlip(!flip)}>{keys[currentCard]}</div>
+            <div className="flashcard" onClick={() => setFlip(!flip)}>{values[currentCard]}</div>
         </ReactCardFlip>
         <button onClick={nextCard}>Next</button>
     </>
