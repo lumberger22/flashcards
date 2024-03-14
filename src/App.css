@@ -71,10 +71,13 @@ label {
 input[type=text] {
   margin-bottom: 20px;
   margin-right: 10px;
+  background-color: lightgray;
+  border: none;
 }
 
 input[type=text]:focus {
-  border: none;
+  outline: none;
+  background-color: white;
 }
 
 #wrong {
@@ -109,4 +112,12 @@ input[type=text]:focus {
 
 .rightContainer {
   flex-grow: 1;
+}
+
+.noShow {
+  display: none;
+}
+
+.show {
+  display: block;
 }
