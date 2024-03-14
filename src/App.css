@@ -11,7 +11,8 @@
 body {
   background-image: url(todd-trapani-background.jpg);
   background-size: 120vw;
-  background-position: 10% 50%;
+  background-position: 10% 54%;
+  background-attachment: fixed;
 }
 
 img {
@@ -120,4 +121,8 @@ input[type=text]:focus {
 
 .show {
   display: block;
+}
+
+.off {
+  visibility: hidden;
 }
