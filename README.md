@@ -6,7 +6,7 @@ This web app displays a deck of flashcards of tennis questions and facts to test
 
 Time spent: 10 hours spent in total
 
-## Required Features
+## Features
 
 The following **required** functionality is completed:
 
@@ -33,7 +33,7 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented required features:
+Here's a walkthrough of implemented features:
 
 ![](walkthrough.gif)
 
