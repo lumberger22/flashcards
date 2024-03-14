@@ -42,7 +42,7 @@ function App() {
   const [correctGuess, setCheckedGuess] = useState('');
   const [maxStreak, setMaxStreak] = useState(0);
   const [currentStreak, setCurrentStreak] = useState(0);
-  const [inputVisibility, setInputVisibility] = useState('noShow');
+  const [inputVisibility, setInputVisibility] = useState('off');
   const [nextVisibility, setNextVisibility] = useState('show');
   const [prevVisibility, setPrevVisibility] = useState('noShow');
   const [form, setForm] = useState({
@@ -81,7 +81,7 @@ function App() {
       setInputVisibility('show');
     }
     else {
-      setInputVisibility('noShow');
+      setInputVisibility('off');
     }
   }
 
@@ -139,7 +139,7 @@ function App() {
     setForm({ guess:'' });
     setCheckedGuess('');
     setCurrentStreak(0);
-    checkVisibility();
+    checkVisibility(0);
   }
 
   const checkAnswer = (e) => {
