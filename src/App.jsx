@@ -42,6 +42,9 @@ function App() {
   const [correctGuess, setCheckedGuess] = useState('');
   const [maxStreak, setMaxStreak] = useState(0);
   const [currentStreak, setCurrentStreak] = useState(0);
+  const [inputVisibility, setInputVisibility] = useState('noShow');
+  const [nextVisibility, setNextVisibility] = useState('show');
+  const [prevVisibility, setPrevVisibility] = useState('noShow');
   const [form, setForm] = useState({
     guess: ''
   });
@@ -55,15 +58,52 @@ function App() {
     }
   }
 
+  function checkPrevVisibility(num) {
+    if (num != 0) {
+      setPrevVisibility('show');
+    }
+    else {
+      setPrevVisibility('noShow');
+    }
+  }
+
+  function checkNextVisibility(num) {
+    if (num != keys.length - 1) {
+      setNextVisibility('show');
+    }
+    else {
+      setNextVisibility('noShow');
+    }
+  }
+
+  function checkInputVisibility(num) {
+    if (num != 0 & num != keys.length - 1) {
+      setInputVisibility('show');
+    }
+    else {
+      setInputVisibility('noShow');
+    }
+  }
+
+  function checkVisibility(num) {
+    checkInputVisibility(num);
+    checkNextVisibility(num);
+    checkPrevVisibility(num);
+  }
+
   function nextCard() {
     if (flip) {
       setFlip(!flip);
+      setTimeout(() => {
+      setCard(currentCard + 1);
+      }, 200);
+    }
+    else {
+      setCard(currentCard + 1);
     }
 
-    setTimeout(() => {
-      setCard(currentCard + 1);
-    }, 200);
-    
+    let curr = currentCard + 1;
+    checkVisibility(curr);
     setForm({ guess:'' });
     setCheckedGuess('');
   }
@@ -71,13 +111,35 @@ function App() {
   function prevCard() {
     if (flip) {
       setFlip(!flip);
+      setTimeout(() => {
+      setCard(currentCard - 1);
+      }, 200);
+    }
+    else {
+      setCard(currentCard - 1);
     }
 
-    setTimeout(() => {
-      setCard(currentCard - 1);
-    }, 200);
+    let curr = currentCard - 1;
+    checkVisibility(curr);
     setForm({ guess:'' });
     setCheckedGuess('');
+  }
+
+  function resetCards() {
+    if (flip) {
+      setFlip(!flip);
+      setTimeout(() => {
+      setCard(0);
+      }, 200);
+    }
+    else {
+      setCard(0);
+    }
+    
+    setForm({ guess:'' });
+    setCheckedGuess('');
+    setCurrentStreak(0);
+    checkVisibility();
   }
 
   const checkAnswer = (e) => {
@@ -99,20 +161,6 @@ function App() {
     }
   }
 
-  function resetCards() {
-    if (flip) {
-      setFlip(!flip);
-    }
-
-    setTimeout(() => {
-      setCard(0);
-    }, 200);
-    
-    setForm({ guess:'' });
-    setCheckedGuess('');
-    setCurrentStreak(0);
-  }
-
   const handleForm = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   }
@@ -130,22 +178,21 @@ function App() {
               <div className="flashcard" onClick={() => setFlip(!flip)}>{values[currentCard]}</div>
           </ReactCardFlip>
           <br/>
-          <form onSubmit={checkAnswer}>
+          <form onSubmit={checkAnswer} className={inputVisibility}>
             <label htmlFor='name'>Guess the answer: </label>
             <input 
-              value={form.guess} 
-              disabled={currentCard === 0 | currentCard == keys.length - 1}
-              id={correctGuess} 
+              value={form.guess}
+              id={correctGuess}
               type="text" 
               name="guess"
               autoComplete='off' 
               onChange={handleForm}/>
-            <input type='submit' disabled={currentCard === 0 | currentCard == keys.length - 1} value='Check' />
+            <input type='submit' value='Check' />
           </form>
           <div className='button-container'>
             <button onClick={resetCards}><span>&#8635;</span></button>
-            <button onClick={prevCard} disabled={currentCard === 0}><span>&#8592;</span></button>
-            <button onClick={nextCard} disabled={currentCard === keys.length - 1}><span>&#8594;</span></button>
+            <button onClick={prevCard} className={prevVisibility}><span>&#8592;</span></button>
+            <button onClick={nextCard} className={nextVisibility}><span>&#8594;</span></button>
           </div>
     </div>
     <div className='rightContainer'>
