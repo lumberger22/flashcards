@@ -20,17 +20,17 @@ function App() {
     "Which of these players has never won a Grand Slam: Gustavo Kuerten, Marin Cilic, Ivan Ljubičić, Gastón Gaudio, Thomas Johansson, Dominic Thiem?" : "Ivan Ljubičić",
     "Who took over from Sue Barker as the main presenter of the BBC's Wimbledon coverage in 2023?" : "Clare Balding",
     "Which two-time WTA Grand Slam champion was Andy Murray's coach for two years between 2014 and 2016?": "Amélie Mauresmo",
-    "Tim Henman and Greg Rusedksi have the seam peak world ranking: what was it?" : "No.4",
+    "Tim Henman and Greg Rusedksi have the seam peak world ranking: what was it?" : "4",
     "Which two players met in three consecutive Wimbledon finals in 1988, 1989 and 1990?" : "Boris Becker, Stefan Edberg",
     "Nicolas Mahut and John Isner recorded the longest tennis match in history at Wimbledon in 2010. How many games were played in total during the final set?" : "138",
     "How many times has Rafael Nadal won the French Open?" : "14",
     "Roger Federer was born in which Swiss city?" : "Basel",
-    "How many Olympic gold medals has Andy Murray won?": "Two (2012, 2016)",
+    "How many Olympic gold medals has Andy Murray won?": "2",
     "Who was the first person to win Wimbledon with an invitation?": "Goran Ivanisevic",
     "How many Grand Slam singles titles did Serena Williams win?": "23",
     "In which year was Roger Federer and Rafael Nadal's epic Wimbledon final that ended at 9:15pm in the dark, a year before the Centre Court roof was installed?" : "2008",
     "Who is the last player to win back-to-back Women's singles Grand Slam titles?" : "Naomi Osaka",
-    "Nick Kyrgios' highest ATP tennis ranking is in the top 10 - true or false?" : "False - his highest ranking was No. 13 in 2016",
+    "Nick Kyrgios' highest ATP tennis ranking is in the top 10 - true or false?" : "false",
     "End of flashcards" : "Reset to try again" 
   };
 
@@ -39,14 +39,12 @@ function App() {
 
   const [currentCard, setCard] = useState(0)
   const [flip, setFlip] = useState(false);
-
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max) + 1;
-  }
-
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  const [correctGuess, setCheckedGuess] = useState('');
+  const [maxStreak, setMaxStreak] = useState(0);
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [form, setForm] = useState({
+    guess: ''
+  });
 
   function showValue(value) {
     if (value.substring(0,3) == "src") {
@@ -64,7 +62,10 @@ function App() {
 
     setTimeout(() => {
       setCard(currentCard + 1);
-    }, 200); 
+    }, 200);
+    
+    setForm({ guess:'' });
+    setCheckedGuess('');
   }
 
   function prevCard() {
@@ -75,24 +76,82 @@ function App() {
     setTimeout(() => {
       setCard(currentCard - 1);
     }, 200);
+    setForm({ guess:'' });
+    setCheckedGuess('');
+  }
+
+  const checkAnswer = (e) => {
+    e.preventDefault();
+    if (form.guess != values[currentCard]) {
+      setCheckedGuess('wrong');
+      if (currentStreak > maxStreak) {
+        setMaxStreak(currentStreak);
+      }
+      setCurrentStreak(0);
+    }
+    else {
+      setCheckedGuess('correct');
+      let curr = currentStreak + 1;
+      setCurrentStreak((currentStreak + 1));
+      if (curr > maxStreak) {  
+        setMaxStreak(curr);
+      }
+    }
+  }
+
+  function resetCards() {
+    if (flip) {
+      setFlip(!flip);
+    }
+
+    setTimeout(() => {
+      setCard(0);
+    }, 200);
+    
+    setForm({ guess:'' });
+    setCheckedGuess('');
+    setCurrentStreak(0);
+  }
+
+  const handleForm = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
   }
 
   return (
     <>
-    <div>
-      <h1>Tennis Knowledge Flashcards</h1>
-      <h2>Use these cards to study fun tennis facts!</h2>
-      <h4>Number of Cards: {keys.length - 1}</h4>
+    <div className='middleContainer'>
+      <div>
+        <h1>Tennis Knowledge Flashcards</h1>
+        <h2>Use these cards to study fun tennis facts!</h2>
+        <br/>
+      </div>
+        <ReactCardFlip onClick={() => setFlip(!flip)} isFlipped={flip} flipDirection="vertical">
+              <div className="flashcard" onClick={() => setFlip(!flip)}>{showValue(keys[currentCard])}</div>
+              <div className="flashcard" onClick={() => setFlip(!flip)}>{values[currentCard]}</div>
+          </ReactCardFlip>
+          <br/>
+          <form onSubmit={checkAnswer}>
+            <label htmlFor='name'>Guess the answer: </label>
+            <input 
+              value={form.guess} 
+              disabled={currentCard === 0 | currentCard == keys.length - 1}
+              id={correctGuess} 
+              type="text" 
+              name="guess"
+              autoComplete='off' 
+              onChange={handleForm}/>
+            <input type='submit' disabled={currentCard === 0 | currentCard == keys.length - 1} value='Check' />
+          </form>
+          <div className='button-container'>
+            <button onClick={resetCards}><span>&#8635;</span></button>
+            <button onClick={prevCard} disabled={currentCard === 0}><span>&#8592;</span></button>
+            <button onClick={nextCard} disabled={currentCard === keys.length - 1}><span>&#8594;</span></button>
+          </div>
     </div>
-      <ReactCardFlip onClick={() => setFlip(!flip)} isFlipped={flip} flipDirection="vertical">
-            <div className="flashcard" onClick={() => setFlip(!flip)}>{showValue(keys[currentCard])}</div>
-            <div className="flashcard" onClick={() => setFlip(!flip)}>{values[currentCard]}</div>
-        </ReactCardFlip>
-        <div className='button-container'>
-          <button onClick={() => setCard(0)}><span>&#8635;</span></button>
-          <button onClick={prevCard} disabled={currentCard === 0}><span>&#8592;</span></button>
-          <button onClick={nextCard} disabled={currentCard === keys.length - 1}><span>&#8594;</span></button>
-        </div>
+    <div className='rightContainer'>
+      <h2>Current Streak: {currentStreak}</h2>
+      <h2>Max Streak: {maxStreak}</h2>
+    </div>
     </>
   )
 }
