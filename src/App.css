@@ -1,10 +1,9 @@
 #root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  margin: 0 auto;
+  margin: 0;
   padding: 2rem;
   text-align: center;
   display: flex;
-  align-items: center;
   justify-content: left;
 }
 
@@ -113,6 +112,9 @@ input[type=text]:focus {
 
 .rightContainer {
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .noShow {
@@ -125,4 +127,32 @@ input[type=text]:focus {
 
 .off {
   visibility: hidden;
+}
+
+.scoreboard {
+  color: black;
+  background-color: white;
+  opacity: 0.8;
+  padding: 0px 50px;
+  border-radius: 7px;
+  border: 3px solid #214e51;
+  margin-top: 13vh;
+}
+
+.scoreTitle {
+  font-size: 30px;
+  line-height: 20px;
+}
+
+.scoreContents {
+  font-size: 20px;
+}
+
+hr {
+  padding: 0;
+  margin: 0;
+}
+
+.scoreValue {
+  font-weight: bold;
 }

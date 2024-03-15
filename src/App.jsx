@@ -17,7 +17,7 @@ function App() {
     "Steffi Graf won all four Grand Slams on multiple occasions - but which did she win most times?" : "Wimbledon",
     "What is the name of the tournament introduced in 2017 as tennis's version of the Ryder Cup?" : "The Laver Cup",
     "Jamie Murray won the Wimbledon Mixed Doubles titles in both 2007 and 2017. Can you name his partners for each occasion?" : "Jelena Jankovic, Martina Hingis",
-    "Which of these players has never won a Grand Slam: Gustavo Kuerten, Marin Cilic, Ivan Ljubičić, Gastón Gaudio, Thomas Johansson, Dominic Thiem?" : "Ivan Ljubičić",
+    "Which of these players has never won a Grand Slam: Gustavo Kuerten, Marin Cilic, Ivan Ljubičić, Gastón Gaudio, Thomas Johansson, Dominic Thiem?" : "Ivan Ljubicic",
     "Who took over from Sue Barker as the main presenter of the BBC's Wimbledon coverage in 2023?" : "Clare Balding",
     "Which two-time WTA Grand Slam champion was Andy Murray's coach for two years between 2014 and 2016?": "Amélie Mauresmo",
     "Tim Henman and Greg Rusedksi have the seam peak world ranking: what was it?" : "4",
@@ -196,8 +196,12 @@ function App() {
           </div>
     </div>
     <div className='rightContainer'>
-      <h2>Current Streak: {currentStreak}</h2>
-      <h2>Max Streak: {maxStreak}</h2>
+      <div className='scoreboard'>
+        <p className='scoreTitle'>Stats</p>
+        <hr></hr>
+        <p className='scoreContents'>Current Streak: <span className='scoreValue'>{currentStreak}</span></p>
+        <p className='scoreContents'>Max Streak: <span className='scoreValue'>{maxStreak}</span></p>
+      </div>
     </div>
     </>
   )
