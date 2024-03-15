@@ -4,7 +4,7 @@ Submitted by: Lucas Umberger
 
 This web app displays a deck of flashcards of tennis questions and facts to test thier knowledge. The user can flip the card from question to answer, and have the option to restart the cards or go to another random card. The user can also guess the answer using an input field and a streak of correct answer counter is displayed on the left hand side.
 
-Time spent: 10 hours spent in total
+Time spent: 11 hours spent in total
 
 ## Features
 
