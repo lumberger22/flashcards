@@ -6,10 +6,10 @@ function App() {
 
   const flashcards = {
     "Get Started!" : "Click the flashcard to reveal the answer",
-    "src:patrick-mouratoglou.jpg" : "Patrick Mouratoglou",
     "src:thiem.jpg" : "Dominic Thiem",
     "src:bublik.jpg" : "Alexander Bublik",
     "src:alex-de-minaur.jpg" : "Alex De Minaur",
+    "src:patrick-mouratoglou.jpg" : "Patrick Mouratoglou",
     "src:humbert.jpg" : "Ugo Humbert",
     "When Carlos Alcaraz won the Wimbledon Men's Singles title in 2023, he became the youngest man to do so since who?" : "Boris Becker",
     "Who did Emma Raducanu beat in the 2021 US Open final to secure an astonishing title win?" : "Leylah Annie Fernandez",
@@ -201,6 +201,7 @@ function App() {
         <hr></hr>
         <p className='scoreContents'>Current Streak: <span className='scoreValue'>{currentStreak}</span></p>
         <p className='scoreContents'>Max Streak: <span className='scoreValue'>{maxStreak}</span></p>
+        <p className='scoreContents'>Number of Cards: <span className='scoreValue'>{keys.length -2}</span></p>
       </div>
     </div>
     </>
