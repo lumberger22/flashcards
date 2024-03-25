@@ -8,7 +8,7 @@
 }
 
 body {
-  background-image: url(todd-trapani-background.jpg);
+  background-image: url(../public/todd-trapani-background.jpg);
   background-size: 120vw;
   background-position: 10% 54%;
   background-attachment: fixed;
